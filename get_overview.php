@@ -70,21 +70,34 @@ switch($_POST['viewLevel']) {
 
                         echo "<table id='tbl_overview' border='2'>";
 
+                        // ROW: Title
                         echo "<tr bgcolor='FFFA78'><th>day</td>";
                         foreach ($jobs as $key => $value)
                                 echo "<th>".$value."</th>";
+                        echo "<th><i>SUM</i></th>";
                         echo "</tr>";
 
+                        // ROW: soll
+                        $row_sum = 0;
                         echo "<tr bgcolor='FFFCA8'><td>SOLL</td>";
-                        foreach ($jobs as $key => $value)
-                                 echo "<td align='right'>".calcMonthShould($key, $viewDate)."</td>";
+                        foreach ($jobs as $key => $value) {
+                        	echo "<td align='right'>".calcMonthShould($key, $viewDate)."</td>";
+                        	$row_sum += calcMonthShould($key, $viewDate);
+                        }
+                        echo "<td align='right'><i>".$row_sum."</i></td>";
                         echo "</tr>";
-
+                        
+                        // ROW: sum
+                        $row_sum = 0;
                         echo "<tr bgcolor='FFFCA8'><td>SUM</td>";
-                        foreach ($jobs as $key => $value)
-                                 echo "<td align='right'>".$sum[$key]."</td>";
+                        foreach ($jobs as $key => $value) {
+                        	echo "<td align='right'>".$sum[$key]."</td>";
+                        	$row_sum += $sum[$key];
+                        }
+                        echo "<td align='right'><i>".$row_sum."</i></td>";
                         echo "</tr>";
 
+                        // value rows 
                         foreach ($tbl as $key => $row) {
                                 //Montage farblich markieren
                                 if ( date("N", mktime(0, 0, 0, substr($viewDate,5,2), $key, substr($viewDate,0,4))) == 1 ) {
@@ -93,15 +106,18 @@ switch($_POST['viewLevel']) {
                                        echo "<tr>";
                                 }
                                 echo "<td><a href='#' onClick='showDay(".$key.");'>".$key."</a></td>";
+                                $row_sum = 0;
                                 foreach ($jobs as $key => $value) {
                                         echo "<td align='right'>";
                                         if ( isset($row[$key])) {
                                                 echo $row[$key];
+                                                $row_sum += $row[$key];
                                         } else {
                                                 echo "&nbsp;";
                                         }
                                         echo "</td>";
                                 }
+                                echo "<td align='right'><i>".$row_sum."</i></td>";
                                 echo "</tr>";
                         }
                         echo "</table>";
@@ -141,24 +157,32 @@ switch($_POST['viewLevel']) {
                         echo "<tr bgcolor='FFFA78'><th>month</td>";
                         foreach ($jobs as $key => $value)
                                 echo "<th>".$value."</th>";
+                        echo "<th><i>SUM</i></th>";
                         echo "</tr>";
 
+                        $row_sum = 0;
                         echo "<tr bgcolor='FFFCA8'><td>SUM</td>";
-                        foreach ($jobs as $key => $value)
-                                 echo "<td align='right'>".minutes2Time($sum[$key])."</td>";
+                        foreach ($jobs as $key => $value) {
+                        	echo "<td align='right'>".minutes2Time($sum[$key])."</td>";
+                        	$row_sum += $sum[$key];
+                        }
+                        echo "<td align='right'><i>".minutes2Time($row_sum)."</i></td>";
                         echo "</tr>";
 
                         foreach ($tbl as $key => $row) {
                                 echo "<tr><td><a href='#' onClick='showMonth(".$key.");'>".$key."</a></td>";
+                                $row_sum = 0;
                                 foreach ($jobs as $key => $value) {
                                         echo "<td align='right'>";
                                         if ( isset($row[$key])) {
                                                 echo minutes2Time($row[$key]);
+                                                $row_sum += $row[$key];
                                         } else {
                                                 echo "&nbsp;";
                                         }
                                         echo "</td>";
                                 }
+                                echo "<td align='right'><i>".minutes2Time($row_sum)."</i></td>";
                                 echo "</tr>";
                         }
                         echo "</table>";
@@ -167,7 +191,7 @@ switch($_POST['viewLevel']) {
                 break;
 
         default;
-    die("Aktion ungültig?!?");
+    die("Aktion ungÃ¼ltig?!?");
     break;
 }
 
