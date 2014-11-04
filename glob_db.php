@@ -1,7 +1,7 @@
 <?php
 //DB-Konstanten
-$DB_NAME  ="redquee_alexarnold";
-$DB_USER  ="redquee_axtime";
-$DB_PWD   ="Time4AX";
-$DB_HOST  ="redquee.mysql.db.internal";
+$DB_NAME  ="";
+$DB_USER  ="";
+$DB_PWD   ="";
+$DB_HOST  ="";
 ?>
