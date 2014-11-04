@@ -40,7 +40,7 @@ switch($user) {
                 $should['J4'] = 0;
 }
 
-//Array mit den Feiertagen (ohne Jahreszahl = jährlich)
+//Array mit den Feiertagen (ohne Jahreszahl = jÃ¤hrlich)
 $holidays100 = array('-01-01','01-02','-08-01','-11-01','-12-25','-12-26');
 $holidays50  = array('-12-24','-12-31');
 //2013
@@ -49,5 +49,14 @@ $holidays100[] = '2013-04-01'; //Ostermontag
 $holidays100[] = '2013-05-09'; //Pfingstmontag
 $holidays100[] = '2013-05-20'; //Auffahrt
 //2014
+$holidays100[] = '2014-04-18'; //Karfreitag
+$holidays100[] = '2014-04-21'; //Ostermontag
+$holidays100[] = '2014-05-29'; //Auffahrt
+$holidays100[] = '2014-06-09'; //Pfingstmontag
+//2015
+$holidays100[] = '2015-04-03'; //Karfreitag
+$holidays100[] = '2015-04-06'; //Ostermontag
+$holidays100[] = '2015-05-14'; //Auffahrt
+$holidays100[] = '2015-05-25'; //Pfingstmontag
 
 ?>
